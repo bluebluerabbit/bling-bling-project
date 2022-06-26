@@ -29,7 +29,7 @@ image = cv2.resize(image, (640, 480))
 scene = cv2.imread('640x480-image.jpg')
 scene = cv2.resize(scene, (640, 480))
 
-'''
+
 # 프레임 복사본 생성 후, salt pepper noise를 제거한다.
 cloneImage = image.copy()  # 현재 프레임의 복사본 생성
 grayImage = cv2.cvtColor(cloneImage, cv2.COLOR_BGR2GRAY)  # 복사본을 회색조 영상으로 변환
@@ -58,7 +58,7 @@ edges = cv2.dilate(edges, kernel, iterations=5)
 edges = cv2.erode(edges, kernel, iterations=2)
 
 # edges 임계치 적용 이미지 출력
-cv2.imshow("Canny", edges)
+cv2.imshow("Canny result", edges)
 
 (cnts, _) = cv2.findContours(edges.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
@@ -72,8 +72,9 @@ c[dm != 255] = scene[dm != 255]
 cv2.imshow("Canny Result", c)
 
 cv2.waitKey(0)
-'''
 
+
+'''
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 # 웹캠 창 크기
@@ -112,7 +113,7 @@ while cap.isOpened():  # 웹캠이 켜진 동안 실행
     # 커널 생성 후 edge 팽창, 침식
     kernel = np.ones((4, 4))
     edges = cv2.dilate(edges, kernel, iterations=5)
-    edges = cv2.erode(edges, kernel, iterations=1)
+    edges = cv2.erode(edges, kernel, iterations=5)
 
     # edges 임계치 적용 이미지 출력
     cv2.imshow("Canny", edges)
@@ -162,6 +163,8 @@ while cap.isOpened():  # 웹캠이 켜진 동안 실행
     cv2.waitKey(1)
 
 cap.release()
+'''
+
 
 # 영상처리
 
